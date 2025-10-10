@@ -1,0 +1,22 @@
+name: autodataengevo
+version: '1.0'
+config-version: 2
+
+profile: autodataengevo_profile
+
+# Default model settings
+models:
+  autodataengevo:
+    staging:
+      department_staging:
+        +post-hook: |
+          INSERT INTO `autodataengevo.Employee_Details_staging.Department_staging`
+          (DepartmentID, Name, GroupName, ModifiedDate, ingestion_timestamp, dbt_run_id)
+          SELECT
+            SAFE_CAST(DepartmentID AS INT64),
+            SAFE_CAST(Name AS STRING),
+            SAFE_CAST(GroupName AS STRING),
+            SAFE_CAST(ModifiedDate AS TIMESTAMP),
+            CURRENT_TIMESTAMP(),
+            "{{ invocation_id }}"
+          FROM `autodataengevo.Employee_Details_raw.Department_raw`

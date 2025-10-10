@@ -1,0 +1,48 @@
+version: 2
+
+sources:
+  - name: Employee_Details_raw
+    database: autodataengevo
+    schema: Employee_Details_raw
+    tables:
+      - name: Department_raw
+
+models:
+  - name: department_staging
+    description: "Staging table for Department"
+    columns:
+      - name: DepartmentID
+        tests:
+          - not_null
+
+  # - name: employee_staging
+  #   description: "Staging: Employee data"
+  #   columns:
+  #     - name: BusinessEntityID
+  #       tests: [not_null, unique]
+  #     - name: NationalIDNumber
+  #       tests: [not_null]
+  #     - name: Gender
+  #       tests:
+  #         - not_null
+  #     - name: HireDate
+  #       tests:
+  #         - not_null
+
+  # - name: employeedepartmenthistory_staging
+  #   description: "Staging: EmployeeDepartmentHistory"
+  #   columns:
+  #     - name: BusinessEntityID
+  #       tests:
+  #         - not_null
+  #     - name: DepartmentID
+  #       tests:
+  #         - not_null
+
+  # - name: employeepayhistory_staging
+  #   description: "Staging: EmployeePayHistory"
+  #   columns:
+  #     - name: BusinessEntityID
+  #       tests: [not_null]
+  #     - name: Rate
+  #       tests: [not_null]

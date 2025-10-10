@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: Employee_Details_raw
+    database: autodataengevo       # Replace with your GCP Project ID
+    schema: Employee_Details_raw
+    tables:
+      - name: Department_raw
+      - name: Employee_raw
+      - name: EmployeeDepartmentHistory_raw
+      - name: EmployeePayHistory_raw

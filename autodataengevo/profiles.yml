@@ -1,0 +1,13 @@
+autodataengevo_profile:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      keyfile: "C:/Users/devas/ServiceAccountJsonKeys/autodataengevo-sa.json"  # update path to your JSON key
+      project: autodataengevo   # your GCP project id
+      dataset: Employee_Details_staging               # default dataset for models
+      threads: 4
+      timeout_seconds: 300
+      location: US          # or your BQ dataset location
+      
