@@ -1,0 +1,77 @@
+version: 2
+
+sources:
+  - name: stg
+    schema: Employee_Details_stg  # Your staging dataset
+    tables:
+      - name: Employee_stg
+        description: "Staging Employee data from Beam pipelines"
+        columns:
+          - name: BUSINESSENTITYID
+            description: "Primary key"
+            tests:
+              - unique
+              - not_null
+          - name: DEPARTMENTID
+            description: "Foreign key to Department"
+            tests:
+              - not_null
+      - name: Department_stg
+        description: "Staging Department data"
+        columns:
+          - name: DEPARTMENTID
+            description: "Department key"
+            tests:
+              - unique
+              - not_null
+          - name: NAME
+            description: "Department name"
+            tests:
+              - not_null
+
+models:
+  - name: EmployeeDepartment_cur
+    description: "SCD Type 2 curation: Feasible employee-department history with joins and filters"
+    columns:
+      - name: BUSINESSENTITYID
+        description: "Employee ID"
+        tests:
+          - not_null
+      - name: NATIONALIDNUMBER
+        description: "National ID"
+        tests:
+          - not_null
+      - name: GENDER
+        description: "Employee gender"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['M', 'F']  # Modern nested syntax
+      - name: DEPARTMENTID
+        description: "Department ID (cast to INT64)"
+        tests:
+          - not_null
+      - name: DEPARTMENTNAME
+        description: "Enriched department name from join"
+        tests:
+          - not_null
+      - name: ROWSTARTDATE
+        description: "SCD history start date"
+        tests:
+          - not_null
+      - name: ROWENDDATE
+        description: "SCD history end date ('9999-12-31' for current records)"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['9999-12-31']  # Simplified: Static for current; no dynamic macro
+      - name: CURATIONINGESTIONTIME
+        description: "DBT run timestamp"
+        tests:
+          - not_null
+      - name: ISCURRENT
+        description: "Flag for current record"
+        tests:
+          - accepted_values:
+              arguments:
+                values: [true]  # Assuming BOOL true for current

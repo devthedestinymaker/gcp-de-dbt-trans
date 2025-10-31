@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: Employee_Details_stg
+    database: gcp-de-batch-sim-464816-476514
+    schema: Employee_Details_stg
+    tables:
+      - name: Employee_stg
+      - name: Department_stg
