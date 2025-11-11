@@ -1,12 +1,13 @@
-employee_details_profile:
+gcp_de_batch_sim_5:
   target: dev
   outputs:
     dev:
       type: bigquery
-      method: oauth
-      project: gcp-de-batch-sim-464816-476514
+      method: service-account
+      project: gcp-de-batch-sim-5
       dataset: Employee_Details_cur
       threads: 4
       timeout_seconds: 300
       location: US
       priority: interactive
+      keyfile: D:/Learning/GCP Data Engineer/PDE Projects/json_key/gcp-de-batch-sim/gcp-de-batch-sim-5-456c9bf832ac.json

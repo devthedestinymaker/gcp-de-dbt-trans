@@ -1,0 +1,15 @@
+name: dbt_employee_details
+version: '1.0'
+profile: gcp_de_batch_sim_5    #employee_details_profile
+
+model-paths: ["gcp-de-batch-sim/models"]
+target-path: "target"
+clean-targets: ["target", "dbt_modules"]
+
+models:
+  staging:
+    Employee_Details_stg:
+      +materialized: view
+  curation:
+    employee_details_cur:
+      +materialized: incremental

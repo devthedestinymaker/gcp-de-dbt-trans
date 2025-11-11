@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: Employee_Details_stg
-    database: gcp-de-batch-sim-464816-476514
+    database: gcp-de-batch-sim-5
     schema: Employee_Details_stg
     tables:
       - name: Employee_stg
